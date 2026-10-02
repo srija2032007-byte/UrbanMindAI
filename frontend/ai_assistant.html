@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>UrbanMindAI Assistant</title>
+
+<link rel="stylesheet" href="css/ai.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<div class="sidebar">
+
+<h2>🏙 UrbanMindAI</h2>
+
+<button onclick="location.href='/'">
+🏠 Dashboard
+</button>
+
+<button onclick="newChat()">
+💬 New Chat
+</button>
+</div>
+
+<div class="chat-area">
+
+<div class="header">
+
+🤖 UrbanMindAI Assistant
+
+</div>
+
+<div id="chatBox" class="chat-box">
+
+<div class="bot">
+
+Hello 👋
+
+I can answer questions about
+
+🚦 Traffic
+
+🌫 Air Quality
+
+🌤 Weather
+
+⚡ Energy
+
+🗑 Waste
+
+🚨 Emergency
+
+</div>
+
+</div>
+
+<div class="input-area">
+
+<input
+type="text"
+id="question"
+placeholder="Ask anything...">
+
+<button onclick="sendQuestion()">
+
+<i class="fa-solid fa-paper-plane"></i>
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<script src="js/ai.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>UrbanMindAI History Dashboard</title>
+
+<link rel="stylesheet" href="css/history.css">
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- ================= HEADER ================= -->
+
+<header>
+
+<div class="left">
+
+<h1>🏙 UrbanMindAI</h1>
+
+<p>Smart City History Analytics</p>
+
+</div>
+
+<div class="right">
+
+<button id="refreshBtn">
+<i class="fa-solid fa-rotate"></i>
+Refresh
+</button>
+
+<button id="downloadBtn">
+<i class="fa-solid fa-download"></i>
+CSV
+</button>
+
+<button onclick="window.location.href='index.html'">
+<i class="fa-solid fa-house"></i>
+Dashboard
+</button>
+
+</div>
+
+</header>
+
+<!-- ================= KPI CARDS ================= -->
+
+<section class="cards">
+
+<div class="card traffic">
+<h3>🚦 Traffic Records</h3>
+<h1 id="trafficCount">0</h1>
+</div>
+
+<div class="card air">
+<h3>🌫 Avg AQI</h3>
+<h1 id="airAvg">0</h1>
+</div>
+
+<div class="card energy">
+<h3>⚡ Avg Energy</h3>
+<h1 id="energyAvg">0%</h1>
+</div>
+
+<div class="card waste">
+<h3>🗑 Avg Waste</h3>
+<h1 id="wasteAvg">0%</h1>
+</div>
+
+<div class="card score">
+<h3>🏙 Avg Score</h3>
+<h1 id="scoreAvg">0</h1>
+</div>
+
+</section>
+
+<!-- ================= CHARTS ================= -->
+
+<div class="chartGrid">
+
+<div class="chartCard">
+
+<h2>🚦 Traffic Trend</h2>
+
+<canvas id="trafficChart"></canvas>
+
+</div>
+
+<div class="chartCard">
+
+<h2>🏙 City Score</h2>
+
+<canvas id="scoreChart"></canvas>
+
+</div>
+
+</div>
+
+<div class="chartGrid">
+
+<div class="chartCard">
+
+<h2>⚡ Energy Usage</h2>
+
+<canvas id="energyChart"></canvas>
+
+</div>
+
+<div class="chartCard">
+
+<h2>🗑 Waste Level</h2>
+
+<canvas id="wasteChart"></canvas>
+
+</div>
+
+</div>
+
+<!-- ================= AI INSIGHTS ================= -->
+
+<div class="insightPanel">
+
+    <h2>🤖 UrbanMindAI Insights</h2>
+
+    <div id="insights">
+
+        Loading AI analysis...
+
+    </div>
+
+</div>
+
+<!-- ================= SUMMARY ================= -->
+
+<div class="summaryGrid">
+
+    <div class="summaryCard">
+
+        <h4>📄 Total Records</h4>
+
+        <h2 id="totalRecords">0</h2>
+
+    </div>
+
+    <div class="summaryCard">
+
+        <h4>🚦 Heavy Traffic</h4>
+
+        <h2 id="heavyTraffic">0</h2>
+
+    </div>
+
+    <div class="summaryCard">
+
+        <h4>🌫 Highest AQI</h4>
+
+        <h2 id="highestAQI">0</h2>
+
+    </div>
+
+    <div class="summaryCard">
+
+        <h4>⚡ Highest Energy</h4>
+
+        <h2 id="highestEnergy">0%</h2>
+
+    </div>
+
+    <div class="summaryCard">
+
+        <h4>🏙 Best City Score</h4>
+
+        <h2 id="bestScore">0</h2>
+
+    </div>
+
+</div>
+<!-- ================= TABLE ================= -->
+
+<div class="tableBox">
+
+<table>
+
+<thead>
+
+<tr>
+
+<th>ID</th>
+
+<th>Time</th>
+
+<th>Traffic</th>
+
+<th>Weather</th>
+
+<th>AQI</th>
+
+<th>Energy</th>
+
+<th>Waste</th>
+
+<th>Emergency</th>
+
+<th>Score</th>
+
+</tr>
+
+</thead>
+
+<tbody id="historyTable">
+
+</tbody>
+
+</table>
+
+</div>
+
+</div>
+
+<script src="js/history.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+<title>UrbanMindAI Command Center</title>
+
+
+<link rel="stylesheet" href="css/style.css">
+
+
+<link rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+
+<link rel="stylesheet"
+href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+
+</head>
+
+
+<body>
+
+
+<!-- ============================= -->
+<!-- SIDEBAR -->
+<!-- ============================= -->
+
+
+<div class="sidebar">
+
+<div class="menu-item" onclick="showRecommendations()">
+
+    🧠
+
+    <span>AI Recommendations</span>
+
+</div>
+<div class="logo">
+
+<h2>
+🏙 UrbanMindAI
+</h2>
+
+
+<p>
+Smart City Command Center
+</p>
+
+
+</div>
+<ul>
+
+<li class="active">
+    <i class="fa-solid fa-chart-line"></i>
+    <span>Dashboard</span>
+</li>
+
+<li onclick="showModule('Traffic')">
+    <i class="fa-solid fa-road"></i>
+    <span>Traffic</span>
+</li>
+
+<li onclick="showModule('Air Quality')">
+    <i class="fa-solid fa-wind"></i>
+    <span>Air Quality</span>
+</li>
+
+<li onclick="showModule('Weather')">
+    <i class="fa-solid fa-cloud-sun"></i>
+    <span>Weather</span>
+</li>
+
+<li onclick="showModule('Energy')">
+    <i class="fa-solid fa-bolt"></i>
+    <span>Energy</span>
+</li>
+
+<li onclick="showModule('Waste')">
+    <i class="fa-solid fa-trash"></i>
+    <span>Waste</span>
+</li>
+
+<li onclick="showModule('Emergency')">
+    <i class="fa-solid fa-triangle-exclamation"></i>
+    <span>Emergency</span>
+</li>
+
+<li onclick="showModule('Reports')">
+    <i class="fa-solid fa-file-lines"></i>
+    <span>Reports</span>
+</li>
+
+<li onclick="window.location.href='ai_assistant.html'">
+    <i class="fa-solid fa-robot"></i>
+    <span>AI Assistant</span>
+</li>
+
+<li onclick="window.location.href='history.html'">
+    <i class="fa-solid fa-clock-rotate-left"></i>
+    <span>History</span>
+</li>
+
+</ul>
+
+</div>
+
+
+
+
+
+<!-- ============================= -->
+<!-- MAIN -->
+<!-- ============================= -->
+
+
+<div class="main">
+
+
+
+<header>
+
+
+
+<div>
+
+
+<h1>
+UrbanMindAI Dashboard
+</h1>
+
+
+<p>
+Autonomous Digital Twin Smart City Platform
+</p>
+
+
+</div>
+
+
+
+
+
+<div class="header-right">
+
+
+<div class="time-box">
+
+
+<h3 id="clock">
+00:00:00
+</h3>
+
+
+<p id="date">
+Loading...
+</p>
+
+
+</div>
+
+
+
+
+<div class="profile">
+
+<i class="fa-solid fa-user"></i>
+
+Admin
+
+</div>
+
+
+
+</div>
+
+
+
+</header>
+
+<!-- ============================= -->
+<!-- LIVE CITY METRICS -->
+<!-- ============================= -->
+
+
+<section class="metrics-grid">
+
+
+<div class="metric-card">
+
+<h3>
+🚦 Traffic
+</h3>
+
+<h2 id="prediction">
+Loading...
+</h2>
+
+<p id="confidence">
+Confidence...
+</p>
+
+</div>
+
+
+
+
+
+<div class="metric-card">
+
+<h3>
+🌫 Air Quality
+</h3>
+
+<h2 id="air">
+Loading...
+</h2>
+
+</div>
+
+
+
+
+
+
+<div class="metric-card">
+
+<h3>
+🌤 Weather
+</h3>
+
+<h2 id="weather">
+Loading...
+</h2>
+
+</div>
+
+
+
+
+
+
+
+<div class="metric-card">
+
+<h3>
+⚡ Energy
+</h3>
+
+<h2 id="energy">
+Loading...
+</h2>
+
+</div>
+
+
+
+
+
+
+
+<div class="metric-card">
+
+<h3>
+🗑 Waste
+</h3>
+
+<h2 id="waste">
+Loading...
+</h2>
+
+</div>
+
+
+
+
+
+
+
+<div class="metric-card">
+
+<h3>
+🏙 City Score
+</h3>
+
+
+<h2 id="cityScore">
+--/100
+</h2>
+
+
+<p id="cityStatus">
+Calculating...
+</p>
+
+
+</div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
+<!-- ============================= -->
+<!-- MAIN COMMAND AREA -->
+<!-- ============================= -->
+
+
+<section class="command-grid">
+
+
+
+
+
+<!-- DIGITAL TWIN MAP -->
+
+
+<div class="command-panel map-panel">
+
+
+<div class="panel-title">
+
+🗺 Digital Twin Smart City
+
+</div>
+
+
+<div id="map"></div>
+
+
+</div>
+
+
+
+
+
+
+<!-- SYSTEM STATUS -->
+
+
+<div class="command-panel">
+
+
+<div class="panel-title">
+
+💻 System Status
+
+</div>
+
+
+
+<p>
+🚦 Traffic AI :
+<span id="trafficStatus">
+Loading
+</span>
+</p>
+
+
+
+<p>
+🌫 Air Monitoring :
+<span id="airStatus">
+Loading
+</span>
+</p>
+
+
+
+
+<p>
+⚡ Energy Grid :
+<span id="energyStatus">
+Loading
+</span>
+</p>
+
+
+
+
+<p>
+🗑 Waste Monitoring :
+<span id="wasteStatus">
+Loading
+</span>
+</p>
+
+
+
+</div>
+
+
+
+</section>
+
+<!-- ============================= -->
+<!-- ANALYTICS SECTION -->
+<!-- ============================= -->
+
+
+<section class="analytics-grid">
+
+
+<div class="chart-panel">
+
+<h3>
+🚦 Traffic Analytics
+</h3>
+
+<canvas id="trafficChart"></canvas>
+
+</div>
+
+
+
+
+<div class="chart-panel">
+
+<h3>
+🌫 Air Quality Analytics
+</h3>
+
+<canvas id="airChart"></canvas>
+
+</div>
+
+
+
+
+
+<div class="chart-panel">
+
+<h3>
+⚡ Energy Analytics
+</h3>
+
+<canvas id="energyChart"></canvas>
+
+</div>
+
+
+
+
+
+<div class="chart-panel">
+
+<h3>
+🗑 Waste Analytics
+</h3>
+
+<canvas id="wasteChart"></canvas>
+
+</div>
+
+
+</section>
+
+
+<!-- ============================= -->
+<!-- AI CITY BRAIN -->
+<!-- ============================= -->
+
+<section class="ai-grid">
+
+    <div class="ai-panel">
+
+        <h2>🤖 AI City Brain</h2>
+
+        <p>Autonomous Multi-Agent Decision System</p>
+
+        <div id="brain">
+
+            <div class="brain-message">
+                🤖 Initializing AI Agents...
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- ============================= -->
+<!-- REPORT SECTION -->
+<!-- ============================= -->
+
+
+<section class="report-panel">
+
+
+<h2>
+📄 AI City Report
+</h2>
+
+
+<p>
+Generate automatic smart city analysis report.
+</p>
+
+
+
+<button id="reportBtn">
+
+Generate Report
+
+</button>
+
+
+</section>
+
+<footer>
+
+
+© 2026 UrbanMindAI |
+Autonomous Digital Twin Smart City Platform
+
+
+</footer>
+
+
+
+
+
+<!-- ============================= -->
+<!-- SCRIPTS -->
+<!-- ============================= -->
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+<div id="modulePanel" class="module-panel">
+
+<button onclick="closeModule()" class="close-btn">
+✖
+</button>
+
+<h2 id="moduleTitle">
+Module
+</h2>
+
+<p id="moduleContent">
+</p>
+
+</div>
+
+<script src="js/script.js"></script>
+
+
+
+
+</div>
+
+
+</body>
+
+
+</html>
